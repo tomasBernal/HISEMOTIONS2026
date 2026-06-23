@@ -17,7 +17,7 @@ parser.add_argument('-l', type=int, help='Language model to use', required=True)
 
 args = parser.parse_args()
 
-DEV_PATH = "dev.csv"
+TRAIN_PATH = "train.csv"
 TEST_PATH = "test.csv"
 
 OUTPUT_PATH = "predictions_llm_" + str(args.l) + ".csv"
@@ -26,10 +26,10 @@ print("Inicio de modelo " + str(args.l))
 
 if __name__ == '__main__':
 
-    dev_df = pd.read_csv(DEV_PATH)
+    train_df = pd.read_csv(TRAIN_PATH)
     test_df = pd.read_csv(TEST_PATH)
 
-    fewshot_examples = build_fewshot_examples(dev_df, n_shots=5)
+    fewshot_examples = build_fewshot_examples(train_df, n_shots=5)
 
     model, text_processor, terminators = load_language_model(args.l)
 
